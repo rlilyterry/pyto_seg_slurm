@@ -21,4 +21,18 @@ __analysis__: For post-segmentation analysis of segmented structures.
 - parallel_analysis.sh and .py: for measuring fluorescence intensities in the yellow channel for objects segmented in either cyan or red above. outputs a .csv-formatted table of objects with intensity and volume for each object along with origin metadata.
 - combine_outputs.sh and .py: for combining multiple .csv-formatted outputs generated using parallel_analysis.sh and .py.
 
+## Running analysis on the Odyssey cluster
+
+Before you can run analysis on the cluster, you'll need to set up an environment using Python 3 (all of our segmentation and analysis scripts are implemented in Python 3). You can find general instructions for getting this up and running [here](https://www.rc.fas.harvard.edu/resources/documentation/software-on-odyssey/python/). Specifically, you'll need to do the following:
+
+- `cd ~`  
+to navigate to your home folder
+- `module load Anaconda3/2.1.0-fasrc01`  
+to switch to Python 3 (with most packages - numpy, scipy, scikit-image, matplotlib, pandas, etc. - already implemented)
+- `pip3 install numpy`  
+to update to the newest version of numpy (the one installed here is a couple of updates behind, and I had to use functions from a newer version of python)
+- `conda create -n PYTO_SEG_ENV --clone="$PYTHON_HOME"`  
+This will save the new "python environment" that you've just made as PYTO_SEG_ENV. From now on, to switch to python 3 on the cluster you'll just need to run `source activate PYTO_SEG_ENV`. However, _you never need to do this at the login node:_ it just needs to be in your .sh submission script (see all of the submission scripts in this repo)
+
+
 Last updated: 10.10.2017
