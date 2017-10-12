@@ -7,16 +7,15 @@
 #SBATCH -o %A_%a.out
 #SBATCH -e %A_%a.err
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=nweir@fas.harvard.edu
+#SBATCH --mail-user=rlilyterry@fas.harvard.edu
 
 img_dir=$1
 colors=$2
 
 source new-modules.sh
-module load Anaconda3/2.1.0-fasrc01
 source activate PYTO_SEG_ENV
 module load fiji/1.49j-fasrc01
 
-python3 ~/code/img_file_cleanup.py -d $img_dir
+python3 ~/code/pyto_seg_slurm/preprocessing/img_file_cleanup.py -d $img_dir
 
-fiji --headless ~/code/batch_merge_channels.py $img_dir $colors
+fiji --headless ~/code/pyto_seg_slurm/preprocessing/batch_merge_channels.py $img_dir $colors
